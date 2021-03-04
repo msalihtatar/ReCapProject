@@ -14,14 +14,32 @@ namespace Business.Concrete
         {
             _carDal = carDal;  
         }
+
+        public void Add(Car car)
+        {
+            if (car.CarName.Length >= 2 && car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Araba bilgilerini doğru giriniz.");
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByBrandId(int bid)
         {
-            return _carDal.GetById(id);
+            return _carDal.GetAll(p => p.BrandId == bid);
+        }
+
+        public List<Car> GetCarsByColorId(int cid)
+        {
+            return _carDal.GetAll(p => p.ColorId == cid);
         }
     }
 }
