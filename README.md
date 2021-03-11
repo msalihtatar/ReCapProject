@@ -5,4 +5,4 @@ Update-1:
 
 2-Dto class has been added.
 
-3-Test codes has been updated.
+3-Test codes have been updated.
