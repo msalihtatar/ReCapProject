@@ -16,6 +16,6 @@ Update-2:
 
 2-New Entity classes have been added.
 
-3-Their crud operations have been updated.
+3-Their crud operations have been added.
 
 4-Test codes have been updated.
