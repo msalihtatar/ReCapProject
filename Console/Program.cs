@@ -14,13 +14,34 @@ namespace ConsoleUI
             //BrandTest();
             //ColorTest();
 
-            CarManager carManager = new CarManager(new EfCarDal());
+            //GetCarDetailsTest();
 
-            foreach (var car in carManager.GetCarDetails())
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            string[] customers = { "Ateş Holding", "Su Holding", "Hava Holding", "Tahta Holding" };
+            for (int i = 1; i <= 3; i++)
             {
-                Console.WriteLine(car.CarName + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
-            }
+                Customer customer = new Customer { Id = i, CompanyName = customers[i], UserId = i };
 
+                var result = customerManager.Add(customer);
+            }
+        }
+
+        private static void GetCarDetailsTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void ColorTest()
@@ -36,12 +57,13 @@ namespace ConsoleUI
 
             var result = colorManager.GetById(2);
 
-            Console.WriteLine(result.ColorName);
+            Console.WriteLine(result.Data.ColorName);
 
             Console.WriteLine("**********************");
             Console.ReadLine();
 
-            foreach (var color in colorManager.GetAll())
+            var result1 = colorManager.GetAll();
+            foreach (var color in result1.Data)
             {
                 Console.WriteLine(color.ColorId + " / " + color.ColorName);
             }
@@ -52,7 +74,8 @@ namespace ConsoleUI
             color1.ColorName = "Yeşil";
 
             colorManager.Update(color1);
-            foreach (var color in colorManager.GetAll())
+            var result2 = colorManager.GetAll();
+            foreach (var color in result2.Data)
             {
                 Console.WriteLine(color.ColorId + " / " + color.ColorName);
             }
@@ -61,7 +84,8 @@ namespace ConsoleUI
             Console.ReadLine();
 
             colorManager.Delete(color1);
-            foreach (var color in colorManager.GetAll())
+            var result3 = colorManager.GetAll();
+            foreach (var color in result3.Data)
             {
                 Console.WriteLine(color.ColorId + " / " + color.ColorName);
             }
@@ -80,12 +104,14 @@ namespace ConsoleUI
 
             var result = brandManager.GetById(2);
 
-            Console.WriteLine(result.BrandName);
+            Console.WriteLine(result.Data.BrandName);
 
             Console.WriteLine("**********************");
             Console.ReadLine();
+            
+            var result1 = brandManager.GetAll();
 
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in result1.Data)
             {
                 Console.WriteLine(brand.BrandId + " / " + brand.BrandName);
             }
@@ -96,7 +122,8 @@ namespace ConsoleUI
             brand1.BrandName = "Tofaş";
 
             brandManager.Update(brand1);
-            foreach (var brand in brandManager.GetAll())
+            var result2 = brandManager.GetAll();
+            foreach (var brand in result2.Data)
             {
                 Console.WriteLine(brand.BrandId + " / " + brand.BrandName);
             }
@@ -105,7 +132,8 @@ namespace ConsoleUI
             Console.ReadLine();
 
             brandManager.Delete(brand1);
-            foreach (var brand in brandManager.GetAll())
+            var result3 = brandManager.GetAll();
+            foreach (var brand in result3.Data)
             {
                 Console.WriteLine(brand.BrandId + " / " + brand.BrandName);
             }
@@ -129,12 +157,12 @@ namespace ConsoleUI
             
             var result = carManager.GetById(2);
 
-            Console.WriteLine(result.CarName);
+            Console.WriteLine(result.Data.CarName);
 
             Console.WriteLine("**********************");
             Console.ReadLine();
-
-            foreach (var car in carManager.GetAll())
+            var result1 = carManager.GetAll();
+            foreach (var car in result1.Data)
             {
                 Console.WriteLine(car.Id + " / " + car.CarName);
             }
@@ -145,7 +173,8 @@ namespace ConsoleUI
             car1.CarName = "Yavas";
 
             carManager.Update(car1);
-            foreach (var car in carManager.GetAll())
+            var result2 = carManager.GetAll();
+            foreach (var car in result2.Data)
             {
                 Console.WriteLine(car.Id + " / " + car.CarName);
             }
@@ -154,7 +183,8 @@ namespace ConsoleUI
             Console.ReadLine();
 
             carManager.Delete(car1);
-            foreach (var car in carManager.GetAll())
+            var result3 = carManager.GetAll();
+            foreach (var car in result3.Data)
             {
                 Console.WriteLine(car.Id + " / " + car.CarName);
             }
