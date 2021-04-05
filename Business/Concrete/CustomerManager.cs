@@ -25,8 +25,7 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
-            var result = _userDal.Get(u => u.Id == customer.UserId);////There is a problem in here
-            if (result.GetType() == typeof(int))
+            if (customer.UserId == 0)  
             {
                 return new ErrorResult(Messages.InvalidUser);
             }
@@ -36,7 +35,7 @@ namespace Business.Concrete
 
         public IResult Delete(Customer customer)
         {
-            if (_userDal.Get(u => u.Id == customer.UserId).GetType() != typeof(User))
+            if (customer.UserId == 0)
             {
                 return new ErrorResult(Messages.InvalidUser);
             }
@@ -56,7 +55,7 @@ namespace Business.Concrete
 
         public IResult Update(Customer customer)
         {
-            if (_customerDal.Get(c => c.Id == customer.Id).GetType() != typeof(Customer))
+            if (customer.UserId == 0)
             {
                 return new ErrorResult(Messages.InvalidUser);
             }

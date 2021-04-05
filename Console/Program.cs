@@ -17,10 +17,10 @@ namespace ConsoleUI
             //GetCarDetailsTest();
 
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            string[] customers = { "Ateş Holding", "Su Holding", "Hava Holding", "Tahta Holding" };
-            for (int i = 1; i <= 3; i++)
+            string[] customers = { "Ateş Holding", "Su Holding", "Hava Holding" };
+            for (int i = 1; i < 4; i++)
             {
-                Customer customer = new Customer { Id = i, CompanyName = customers[i], UserId = i };
+                Customer customer = new Customer { Id = i, CompanyName = customers[i-1], UserId = i };
 
                 var result = customerManager.Add(customer);
             }
